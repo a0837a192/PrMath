@@ -1,12 +1,5 @@
-#include <chrono>
-#include <iostream>
-#include <limits>
-#include <random>
-#include <string>
-#include <termios.h>
-#include <thread>
-#include <unistd.h>
-#include <vector>
+#include "pch.hpp"
+
 
 //without enter input
 
