@@ -1,5 +1,7 @@
 #include "pch.hpp"
 
+//input without enter
+
 int getch() {
     struct termios oldt, newt;
     int ch;
@@ -26,7 +28,7 @@ void drawMenu(const std::vector<std::string> &options, int selected) {
     }
 }
 
-//random number 
+//random number for game
 
 const int getCard(const int &random) {
     std::mt19937 mt{std::random_device{}()};
@@ -34,9 +36,9 @@ const int getCard(const int &random) {
     return card(mt);
 }
 
-//draw beautiful text
+//draw beautiful text with timer
 
-void getTx(const std::string_view text, const int &time) {
+void getGdText(const std::string_view text, const int &time) {
     for (int i = 0; i < text.length(); i++) {
         std::cout << text[i] << std::flush;
         std::this_thread::sleep_for(std::chrono::milliseconds(time));
@@ -53,12 +55,12 @@ void ignoreLine() { std::cin.ignore(std::numeric_limits<std::streamsize>::max(),
 
 //main game
 
-void printSol(const int ran1, const int ran2) {
-    const int res{ran1 + ran2};
-    int resU{};
-    std::cout << "\n" << ran1 << " + " << ran2 << " = ";
-    std::cin >> resU;
-    if (resU == res) {
+void printSolve(const int randomOne, const int randomTwo) {
+    const int result{randomOne + randomTwo};
+    int resUser{};
+    std::cout << "\n" << randomOne << " + " << randomTwo << " = ";
+    std::cin >> resUser;
+    if (resUser == result) {
         std::cout << "Correct" << std::flush;
         std::this_thread::sleep_for(std::chrono::milliseconds(600));
         std::cout << "\033[H\033[J";
@@ -76,22 +78,23 @@ void printSol(const int ran1, const int ran2) {
 
 int main() {
 
-
+    //start menu
 
     std::this_thread::sleep_for(std::chrono::milliseconds(400)); // timer
 
-    getTx("Hello! ", 50); // beautiful text
+    getGdText("Hello! ", 50); // beautiful text
 
     std::this_thread::sleep_for(std::chrono::milliseconds(500)); 
 
-    getTx("It is a math practic! ", 50);
+    getGdText("It is a math practic! ", 50);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
-    getTx("Choose the difficult: \n", 50);
+    getGdText("Choose the difficult: \n", 50);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
+    //for choose the diff
     std::vector<std::string> options = {"Easy", "Medium", "Hard", "Extreme"};
     int selected = 0;
     bool running = true;
@@ -156,7 +159,7 @@ int main() {
 
         //and you need to solve the problem like 10+2 or 4+6 (easy) or in extreme problems like 36+18 or 34+7 and other
 
-        printSol(random1, random2);
+        printSolve(random1, random2);
     }
 
     return 0;
